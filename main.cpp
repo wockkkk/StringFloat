@@ -9,16 +9,14 @@ class StrF {
             if (num_char == a) {
                 return i;
             }
-            num_char = NUM_LIST[i+1];
+            num_char = NUM_LIST[i + 1];
         }
         return -1;
     }
-    static char put_num(short a) {
-        return NUM_LIST[a];
-    }
+    static char put_num(short a) { return NUM_LIST[a]; }
     static bool add(char &a, char b, bool plus_bit) {
         bool bit = false;
-        short a_num= get_num(a), b_num= get_num(b), plus_num = short(a_num + b_num + plus_bit);
+        short a_num = get_num(a), b_num = get_num(b), plus_num = short(a_num + b_num + plus_bit);
         if (plus_num >= 10) {
             plus_num -= 10;
             bit = true;
@@ -26,8 +24,6 @@ class StrF {
         a = put_num(plus_num);
         return bit;
     }
-
-
 
 
 public:
@@ -43,14 +39,18 @@ public:
 
     void plus(StrF str) {
         if (str1.length() > str.str1.length()) {
-            for (; 0 != (str1.length() - str.str1.length()); str.str1 = "0"+str1){}
+            for (; 0 != (str1.length() - str.str1.length()); str.str1 = "0" + str1) {
+            }
         } else if (str1.length() < str.str1.length()) {
-            for (; 0 != (str.str1.length() - str1.length()); str1 = "0"+str.str1) {}
+            for (; 0 != (str.str1.length() - str1.length()); str1 = "0" + str.str1) {
+            }
         }
         if (str2.length() > str.str2.length()) {
-            for (; 0 != (str2.length() - str.str2.length()); str.str2 += "0"){}
+            for (; 0 != (str2.length() - str.str2.length()); str.str2 += "0") {
+            }
         } else if (str2.length() < str.str2.length()) {
-            for (; 0 != (str.str2.length() - str2.length()); str2 += "0") {}
+            for (; 0 != (str.str2.length() - str2.length()); str2 += "0") {
+            }
         }
         bool add = false;
         for (unsigned long long i = str2.length(); i > 0; i--) {
@@ -66,14 +66,14 @@ public:
         for (int i = 0; i < temp; ++i) {
             if (str1[i] == '0') {
                 str1.erase(i, 1);
-            }else {
+            } else {
                 break;
             }
         }
         for (unsigned long long i = str2.length(); i != 0; --i) {
             if (str2[i - 1] == '0') {
                 str2.erase(i - 1, 1);
-            }else {
+            } else {
                 break;
             }
         }
@@ -93,7 +93,7 @@ int main() {
     StrF str2(string2);
     std::cout << "str2 = " << str2.get_str() << endl;
     str.plus(str2);
-    std::cout << "plus str1=" <<str.get_str() << endl;
+    std::cout << "plus str1=" << str.get_str() << endl;
     return 0;
     // 还可以更多！
 }
