@@ -29,12 +29,13 @@ class StrF {
         a = put_num(plus_num);
         return bit;
     }
+
 public:
     std::string str1;
     std::string str2;
     bool is_minus = false;
     explicit StrF(std::string instr) {
-        if (instr[0] == '-'){
+        if (instr[0] == '-') {
             instr.erase(0, 1);
             is_minus = true;
         }
@@ -44,11 +45,10 @@ public:
         del_zero();
     }
     std::string get_str() const {
-        if(is_minus) {
+        if (is_minus) {
             return "-" + str1 + "." + str2;
         }
         return str1 + "." + str2;
-
     }
 
     void plus(StrF str);
@@ -82,7 +82,7 @@ inline void StrF::plus(StrF str) {
     }
     del_zero();
 }
-inline  void StrF::del_zero(){
+inline void StrF::del_zero() {
     unsigned long long temp = str1.length();
     for (int i = 0; i < temp; ++i) {
         if (str1[i] == '0') {
@@ -99,4 +99,4 @@ inline  void StrF::del_zero(){
         }
     }
 }
-#endif //STR_F_H
+#endif // STR_F_H
