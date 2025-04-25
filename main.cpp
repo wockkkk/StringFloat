@@ -7,14 +7,14 @@ int main() {
     std::cout << "in!:";
     std::cin >> string1;
     StrF str(string1);
-    std::cout << "str1 = " << str.get_str() << endl;
+    std::cout << "str1 = " << str << endl;
     std::string string2;
     std::cout << "in!:\n";
     std::cin >> string2;
     StrF str2(string2);
-    std::cout << "str2 = " << str2.get_str() << endl;
-    str.plus(str2);
-    std::cout << "plus str1=" << str.get_str() << endl;
+    std::cout << "str2 = " << str2 << endl;
+    str+=str2;
+    std::cout << "plus str1=" << str << endl;
     return 0;
     // 还可以更多！
 }

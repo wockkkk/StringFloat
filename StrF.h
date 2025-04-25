@@ -33,54 +33,54 @@ class StrF {
 public:
     std::string str1;
     std::string str2;
-    bool is_minus = false;
-    explicit StrF(std::string instr) {
-        if (instr[0] == '-') {
-            instr.erase(0, 1);
-            is_minus = true;
-        }
+    explicit StrF(const std::string& instr) {
         unsigned long long point = instr.find('.');
         str1 = instr.substr(0, point);
         str2 = instr.substr(point + 1, instr.length() - point - 1);
         del_zero();
     }
     std::string get_str() const {
-        if (is_minus) {
-            return "-" + str1 + "." + str2;
-        }
         return str1 + "." + str2;
     }
-
-    void plus(StrF str);
+    friend void operator+=(StrF str1 , StrF str2);
+    friend StrF operator+(StrF str1 , StrF str2);
+    friend std::ostream& operator<<(std::ostream& os, const StrF& str) {
+        return os << str.get_str();
+    }
     void del_zero();
     // 还可以更多！
 };
-inline void StrF::plus(StrF str) {
-    if (str1.length() > str.str1.length()) {
-        for (; 0 != (str1.length() - str.str1.length()); str.str1 = "0" + str.str1) {
+inline void operator+=(StrF str1 , StrF str2){
+    if (str1.str1.length() > str2.str1.length()) {
+        for (; 0 != (str1.str1.length() - str2.str1.length()); str2.str1 = "0" + str2.str1) {
         }
-    } else if (str1.length() < str.str1.length()) {
-        for (; 0 != (str.str1.length() - str1.length()); str1 = "0" + str1) {
+    } else if (str1.str1.length() < str2.str1.length()) {
+        for (; 0 != (str2.str1.length() -str1.str1.length());str1.str1 = "0" +str1.str1) {
         }
     }
-    if (str2.length() > str.str2.length()) {
-        for (; 0 != (str2.length() - str.str2.length()); str.str2 += "0") {
+    if (str1.str2.length() > str2.str2.length()) {
+        for (; 0 != (str1.str2.length() - str2.str2.length()); str2.str2 += "0") {
         }
-    } else if (str2.length() < str.str2.length()) {
-        for (; 0 != (str.str2.length() - str2.length()); str2 += "0") {
+    } else if (str1.str2.length() < str2.str2.length()) {
+        for (; 0 != (str2.str2.length() -str1.str2.length());str1.str2 += "0") {
         }
     }
     bool add = false;
-    for (unsigned long long i = str2.length(); i > 0; i--) {
-        add = StrF::add(str2[i - 1], str.str2[i - 1], add);
+    for (unsigned long long i =str1.str2.length(); i > 0; i--) {
+        add = StrF::add(str1.str2[i - 1], str2.str2[i - 1], add);
     }
-    for (unsigned long long i = str1.length(); i > 0; i--) {
-        add = StrF::add(str1[i - 1], str.str1[i - 1], add);
+    for (unsigned long long i =str1.str1.length(); i > 0; i--) {
+        add = StrF::add(str1.str1[i - 1], str2.str1[i - 1], add);
     }
     if (add) {
-        str1 = "1" + str1;
+       str1.str1 = "1" +str1.str1;
     }
-    del_zero();
+    str1.del_zero();
+}
+inline StrF operator+(const StrF &str1 , const StrF &str2){
+    StrF temp = str1;
+    temp += str2;
+    return temp;
 }
 inline void StrF::del_zero() {
     unsigned long long temp = str1.length();
