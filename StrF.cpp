@@ -1,5 +1,5 @@
 #include "StrF.h"
-void StrF::fill_zero(StrF &str1,StrF &str2) {
+void StrF::fill_zero(StrF &str1, StrF &str2) {
     if (str1.str1.length() > str2.str1.length()) {
         for (; 0 != (str1.str1.length() - str2.str1.length()); str2.str1 = "0" + str2.str1) {
         }
@@ -35,8 +35,8 @@ StrF operator+(const StrF &str1, const StrF &str2) {
     temp += str2;
     return temp;
 }
-bool operator>(StrF str_a, StrF str){
-    StrF::fill_zero(str_a,str);
+bool operator>(StrF str_a, StrF str) {
+    StrF::fill_zero(str_a, str);
     if (str_a.is_min && !str.is_min) {
         return false;
     }
@@ -99,28 +99,22 @@ bool operator>(StrF str_a, StrF str){
     }
     return return_value;
 }
-bool StrF::operator== (const StrF& str) const {
+bool StrF::operator==(const StrF &str) const {
     if (str1 == str.str1 && str2 == str.str2 && is_min == str.is_min) {
         return true;
     }
     return false;
 }
-bool StrF::operator<=(const StrF& str) const {
-    return (*this < str || *this == str);
-}
-bool StrF::operator<(const StrF& str) const {
+bool StrF::operator<=(const StrF &str) const { return (*this < str || *this == str); }
+bool StrF::operator<(const StrF &str) const {
     if (*this == str) {
         return false;
     }
     return !(*this > str);
 }
-bool StrF::operator>=(const StrF& str) const {
-    return (*this > str || *this == str);
-}
+bool StrF::operator>=(const StrF &str) const { return (*this > str || *this == str); }
 
-bool StrF::operator!=(const StrF& str) const {
-    return !(*this == str);
-}
+bool StrF::operator!=(const StrF &str) const { return !(*this == str); }
 void StrF::del_zero() {
     unsigned long long temp = str1.length();
     for (int i = 0; i < temp; ++i) {
@@ -139,7 +133,8 @@ void StrF::del_zero() {
     }
 }
 StrF::StrF(const std::string &instr) {
-    if (instr[0] == '-') is_min = true;
+    if (instr[0] == '-')
+        is_min = true;
     unsigned long long point = instr.find('.');
     str1 = instr.substr(0, point);
     str2 = instr.substr(point + 1, instr.length() - point - 1);

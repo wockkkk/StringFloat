@@ -26,7 +26,7 @@ class StrF {
         return bit;
     }
     void del_zero();
-    static void fill_zero(StrF&, StrF&);
+    static void fill_zero(StrF &, StrF &);
     std::string str1;
     std::string str2;
     bool is_min = false;

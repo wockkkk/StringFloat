@@ -15,8 +15,11 @@ int main() {
     cout << "str2 = " << str2 << endl;
     str += str2;
     cout << "plus str1=" << str << endl;
-    if (str >str2){cout << ">:" << "ture";}
-    else {cout << ">:" << "false";}
+    if (str > str2) {
+        cout << ">:" << "ture";
+    } else {
+        cout << ">:" << "false";
+    }
 
     return 0;
     // 还可以更多！
