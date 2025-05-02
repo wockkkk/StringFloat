@@ -25,15 +25,32 @@ class StrF {
         a = put_num(plus_num);
         return bit;
     }
+    static bool sub(char &a,const char &b, const bool sub_bit) {
+        bool bit = false;
+        short a_num = get_num(a), b_num = get_num(b), min_num = static_cast<short>(a_num - b_num - sub_bit);
+        if (min_num < 0) {
+            min_num += 10;
+            bit = true;
+        }
+        a = put_num(min_num);
+        return bit;
+    }
     void del_zero();
     static void fill_zero(StrF &, StrF &);
-    std::string str1;
-    std::string str2;
+    std::string str_i;
+    std::string str_m;
     bool is_min = false;
+    StrF plus(StrF);
+    StrF min(StrF);
 
 public:
     explicit StrF(const std::string &instr);
-    std::string get_str() const { return str1 + "." + str2; }
+    std::string get_str() const {
+        if (is_min) {
+            return "-" + str_i + "." + str_m;
+        }
+        return str_i + "." + str_m;
+    }
     friend StrF operator+=(StrF &str1, StrF str2);
     friend StrF operator+(StrF str1, StrF str2);
     friend std::ostream &operator<<(std::ostream &os, const StrF &str) { return os << str.get_str(); }
@@ -43,6 +60,11 @@ public:
     bool operator>=(const StrF &str) const;
     bool operator<=(const StrF &str) const;
     bool operator!=(const StrF &str) const;
+    StrF abs() {
+        StrF tmp = *this;
+        tmp.is_min = false;
+        return tmp;
+    }
 
     // more!
 };
